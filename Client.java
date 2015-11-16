@@ -6,6 +6,7 @@ public class Client {
 	public static void main(String[] args) {
 		try {
 			Socket socket = new Socket("localhost", 2225);
+			Serializer serializer = new Serializer();
 			Scanner in = new Scanner(System.in);
 			ObjectCreator objCreator = new ObjectCreator(in);
 			PrintInstruction();
@@ -23,7 +24,7 @@ public class Client {
 					if(obj != null)
 					{
 						System.out.println("Serializing...");
-						
+						serializer.serialize(obj);
 						System.out.println("Sending");
 					}
 				}
