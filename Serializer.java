@@ -12,12 +12,14 @@ import org.jdom2.output.XMLOutputter;
 
 public class Serializer {
 	private IdentityHashMap objects;
+	private IdentityHashMap arrays;
 	final Class<?>[] PRIMITIVE_WRAPPERS = {Boolean.class, Byte.class, Short.class,
 											Integer.class, Long.class, Float.class,
 											 Double.class, Character.class, String.class};
 	public Serializer()
 	{
 		objects = new IdentityHashMap<>();
+		arrays = new IdentityHashMap<>();
 	}
 	public Document serialize(Object obj)
 	{
@@ -84,7 +86,14 @@ public class Serializer {
 				}
 				else if (val.getClass().isArray())
 				{
-					// handle array
+					Element field = new Element("field");
+					field.setAttribute(new Attribute("name", fields[i].getName()));
+					field.setAttribute(new Attribute("declaringclass", fields[i].getDeclaringClass().getName()));
+					Element reference = new Element("reference");
+					reference.setText(Integer.toString(val.hashCode()));
+					field.setContent(reference);
+					object.addContent(field);
+					arrays.put(val.hashCode(), val);
 				}
 				else
 				{
