@@ -1,4 +1,7 @@
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -39,9 +42,8 @@ public class MainThread extends Thread{
 		{
 			try 
 			{
-				Socket socket = serverSocket.accept();				
-				System.out.println("Accepted a connection");
-				
+				ThreadedConnection thread = new ThreadedConnection(serverSocket.accept());
+				thread.start();
 			}
 			catch (SocketTimeoutException e)
 			{

@@ -1,3 +1,6 @@
+
+
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -36,12 +39,15 @@ public class Serializer{
 				Class declClass = fields[i].getDeclaringClass(); //#6
 				fElt.setAttribute("declaringclass", //#6
 						declClass.getName()); //#6
+				fElt.setAttribute("type", //#6
+						fields[i].getType().getName()); //#6
 				//#6
 				Class fieldtype = fields[i].getType(); //#6
 				Object child = fields[i].get(source); //#6
 				//#6
 				if (Modifier.isTransient(fields[i].getModifiers())) { //#6
-					child = null; //#6
+					child = fields[i].get(source); //#6
+					
 				} //#6
 				fElt.addContent(serializeVariable(fieldtype, child, //#6
 						target, table)); //#6

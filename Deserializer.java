@@ -1,8 +1,15 @@
+/**************
+ *  Reference: 
+ *  Java Reflection in Action
+ *  Ira R. Forman and Nate Forman
+ *  https://www.manning.com/books/java-reflection-in-action
+ */
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.IdentityHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +20,7 @@ public class Deserializer {
 	public static Object deserializeObject(Document source) throws Exception {
 		List objList = source.getRootElement().getChildren();
 
-		Map table = new IdentityHashMap();
+		Map table = new HashMap();
 
 		createInstances(table, objList);
 
@@ -68,7 +75,9 @@ public class Deserializer {
 					}
 
 					Element vElt = (Element) fElt.getChildren().get(0);
+					
 					f.set(instance, deserializeValue(vElt, f.getType(), table));
+					
 				}
 			} else {
 				Class comptype = instance.getClass().getComponentType();
