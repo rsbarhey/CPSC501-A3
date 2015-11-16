@@ -48,6 +48,7 @@ public class Client {
 		System.out.println("2- Circular referenced object");
 		System.out.println("3- PrimitiveArry object");
 		System.out.println("4- ReferenceArray object");
+		System.out.println("5- Collction of Primitive Objects");
 		
 		System.out.println("*****************************************************");
 		System.out.println("Type in Quit to quit the program");
@@ -68,6 +69,9 @@ public class Client {
 		case "4":
 			System.out.println("You have chosen Reference Array");
 			return objCreator.CreateRefrenceArray();
+		case "5":
+			System.out.println("You have chosen PrimitiveObj Collection");
+			return objCreator.CreatePrimitiveCol();
 		default:
 			System.out.println("Unknown choice, please follow the instruction");
 			PrintInstruction();
