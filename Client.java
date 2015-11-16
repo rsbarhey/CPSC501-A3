@@ -7,6 +7,7 @@ public class Client {
 		try {
 			Socket socket = new Socket("localhost", 2225);
 			Scanner in = new Scanner(System.in);
+			ObjectCreator objCreator = new ObjectCreator(in);
 			PrintInstruction();
 			while(true)
 			{
@@ -18,7 +19,7 @@ public class Client {
 				}
 				else
 				{
-					ProcessChoice(choice);
+					ProcessChoice(choice, objCreator);
 				}
 			}
 			
@@ -41,12 +42,13 @@ public class Client {
 		System.out.println("*****************************************************");
 		System.out.println("Type in Quit to quit the program");
 	}
-	public static void ProcessChoice(String choice)
+	public static void ProcessChoice(String choice, ObjectCreator objCreator)
 	{
 		switch(choice)
 		{
 		case "1":
 			System.out.println("You have chosen Primitive");
+			Primitive primitive = objCreator.CreatePrimitve();
 			break;
 		default:
 			System.out.println("Unknown choice, please follow the instruction");
