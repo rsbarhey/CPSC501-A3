@@ -44,6 +44,7 @@ public class Client {
 		System.out.println("------------Object creator interface-----------------");
 		System.out.println("Please enter the number of the object you wish to create");
 		System.out.println("1- Primitive object");
+		System.out.println("2- Circular referenced objects");
 		
 		System.out.println("*****************************************************");
 		System.out.println("Type in Quit to quit the program");
@@ -55,6 +56,9 @@ public class Client {
 		case "1":
 			System.out.println("You have chosen Primitive");
 			return objCreator.CreatePrimitve();
+		case "2":
+			System.out.println("You have chosen Circular object");
+			return objCreator.CreateCircular();
 		default:
 			System.out.println("Unknown choice, please follow the instruction");
 			PrintInstruction();

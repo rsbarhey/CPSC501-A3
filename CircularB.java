@@ -1,9 +1,10 @@
 
 public class CircularB {
 	private CircularA cricularA;
-	
-	public CircularB()
+	private int b;
+	public CircularB(int para)
 	{
+		b = para;
 	}
 	
 	public void SetCricle(CircularA circA)

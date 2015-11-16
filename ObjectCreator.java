@@ -22,4 +22,23 @@ public class ObjectCreator {
 		System.out.println("Successfully created Primitive with values " + value);
 		return new Primitive(intVal, floatVal, stringVal);
 	}
+	
+	public CircularA CreateCircular()
+	{
+		System.out.println("Enter two integers separated by a space");
+		System.out.println("int int");
+		String value = in.nextLine();
+		String[] parsedValue = value.split(" ");
+		int a = Integer.parseInt(parsedValue[0]);
+		int b = Integer.parseInt(parsedValue[1]);
+		
+		CircularA circA = new CircularA(a);
+		CircularB circB = new CircularB(b);
+		circA.SetCircle(circB);
+		circB.SetCricle(circA);
+		
+		System.out.printf("Successfully created CircualrA object with field value %d and field reference to CircularB\n", a);
+		System.out.printf("Successfully created CircualrB object with field value %d and field reference to CircularA\n", b);
+		return circA;
+	}
 }
