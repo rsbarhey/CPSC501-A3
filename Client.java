@@ -19,7 +19,13 @@ public class Client {
 				}
 				else
 				{
-					ProcessChoice(choice, objCreator);
+					Object obj = ProcessChoice(choice, objCreator);
+					if(obj != null)
+					{
+						System.out.println("Serializing...");
+						
+						System.out.println("Sending");
+					}
 				}
 			}
 			
@@ -42,17 +48,17 @@ public class Client {
 		System.out.println("*****************************************************");
 		System.out.println("Type in Quit to quit the program");
 	}
-	public static void ProcessChoice(String choice, ObjectCreator objCreator)
+	public static Object ProcessChoice(String choice, ObjectCreator objCreator)
 	{
 		switch(choice)
 		{
 		case "1":
 			System.out.println("You have chosen Primitive");
-			Primitive primitive = objCreator.CreatePrimitve();
-			break;
+			return objCreator.CreatePrimitve();
 		default:
 			System.out.println("Unknown choice, please follow the instruction");
 			PrintInstruction();
 		}
+		return null;
 	}
 }
