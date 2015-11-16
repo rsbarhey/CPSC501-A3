@@ -44,7 +44,9 @@ public class Client {
 		System.out.println("------------Object creator interface-----------------");
 		System.out.println("Please enter the number of the object you wish to create");
 		System.out.println("1- Primitive object");
-		System.out.println("2- Circular referenced objects");
+		System.out.println("2- Circular referenced object");
+		System.out.println("3- PrimitiveArry object");
+		System.out.println("4- ReferenceArray object");
 		
 		System.out.println("*****************************************************");
 		System.out.println("Type in Quit to quit the program");
@@ -55,10 +57,16 @@ public class Client {
 		{
 		case "1":
 			System.out.println("You have chosen Primitive");
-			return objCreator.CreatePrimitve();
+			return objCreator.CreatePrimitive();
 		case "2":
 			System.out.println("You have chosen Circular object");
 			return objCreator.CreateCircular();
+		case "3":
+			System.out.println("You have chosen PrimitiveArray");
+			return objCreator.CreatePrimitiveArray();
+		case "4":
+			System.out.println("You have chosen Reference Array");
+			return objCreator.CreateRefrenceArray();
 		default:
 			System.out.println("Unknown choice, please follow the instruction");
 			PrintInstruction();

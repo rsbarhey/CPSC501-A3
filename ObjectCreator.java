@@ -7,7 +7,7 @@ public class ObjectCreator {
 		this.in = in;
 	}
 	
-	public Primitive CreatePrimitve()
+	public Primitive CreatePrimitive()
 	{
 		System.out.println("Enter the fields values seprated by a single");
 		System.out.println("int float string");
@@ -40,5 +40,38 @@ public class ObjectCreator {
 		System.out.printf("Successfully created CircualrA object with field value %d and field reference to CircularB\n", a);
 		System.out.printf("Successfully created CircualrB object with field value %d and field reference to CircularA\n", b);
 		return circA;
+	}
+	
+	public PrimitiveArray CreatePrimitiveArray()
+	{
+		System.out.println("Enter integers separated by a single space");
+		System.out.println("int int int int int int ...");
+		String value = in.nextLine();
+		String[] parsedValue = value.split(" ");
+		int[] array = new int[parsedValue.length];
+		for(int i = 0; i<array.length; i++)
+		{
+			array[i] = Integer.parseInt(parsedValue[i]);
+		}
+		
+		PrimitiveArray primitiveArray = new PrimitiveArray(array);
+		
+		System.out.println("Successfully created an object with array: "+ value);
+		return primitiveArray;
+	}
+	
+	public RefrenceArray CreateRefrenceArray()
+	{
+		System.out.println("Enter how many Primitive you wish to create");
+		String value = in.nextLine();
+		int count = Integer.parseInt(value);
+		Primitive[] refArray = new Primitive[count];
+		for(int i = 0; i<count; i++)
+		{
+			refArray[i] = CreatePrimitive();
+		}
+		
+		System.out.println("Successfully created an object with array of references");
+		return new RefrenceArray(refArray);
 	}
 }
