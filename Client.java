@@ -1,12 +1,19 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.*;
 import java.util.Scanner;
+
+import org.jdom2.Document;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 public class Client {
 	
 	public static void main(String[] args) {
 		try {
 			Socket socket = new Socket("localhost", 2225);
-			Serializer serializer = new Serializer();
 			Scanner in = new Scanner(System.in);
 			ObjectCreator objCreator = new ObjectCreator(in);
 			PrintInstruction();
@@ -24,8 +31,31 @@ public class Client {
 					if(obj != null)
 					{
 						System.out.println("Serializing...");
-						serializer.serialize(obj);
-						System.out.println("Sending");
+						try {
+							Document doc = Serializer.serialize(obj);
+							XMLOutputter xmlOut = new XMLOutputter();
+							xmlOut.setFormat(Format.getPrettyFormat());
+							
+							xmlOut.output(doc, System.out);
+							xmlOut.output(doc, new FileWriter("newXmlFile.xml"));
+							System.out.println("Sending");
+							File fileToSend = new File("newXmlFile.xml");
+							if(fileToSend.exists())
+							{
+								FileInputStream fin = new FileInputStream(fileToSend);
+								byte[] fileBytes = new byte[(int) fileToSend.length()];
+								fin.read(fileBytes);
+								OutputStream out = socket.getOutputStream();
+								out.write(fileBytes);
+								out.flush();
+								out.close();
+								socket.close();
+							}
+							break;
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 			}
